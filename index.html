@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#08080a">
+  <title>Combien le Coq t'a plumé ce mois-ci ?</title>
+  <meta name="description" content="Lausanne 21,45/h, Genève 24,60/h. Même travail. Calcule la différence.">
+  <link rel="stylesheet" href="style.css?v=10">
+</head>
+<body>
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-piste">
+      <span>Lausanne 21,45/h ☭ Genève 24,60/h ☭ même travail, même salaire ! ☭ </span><span>Lausanne 21,45/h ☭ Genève 24,60/h ☭ même travail, même salaire ! ☭ </span><span>Lausanne 21,45/h ☭ Genève 24,60/h ☭ même travail, même salaire ! ☭ </span><span>Lausanne 21,45/h ☭ Genève 24,60/h ☭ même travail, même salaire ! ☭ </span><span>Lausanne 21,45/h ☭ Genève 24,60/h ☭ même travail, même salaire ! ☭ </span><span>Lausanne 21,45/h ☭ Genève 24,60/h ☭ même travail, même salaire ! ☭ </span><span>Lausanne 21,45/h ☭ Genève 24,60/h ☭ même travail, même salaire ! ☭ </span><span>Lausanne 21,45/h ☭ Genève 24,60/h ☭ même travail, même salaire ! ☭ </span>
+    </div>
+  </div>
+
+  <main>
+    <header>
+      <img class="coq" src="coq.png?v=10" alt="Un coq en costume, avec une canne et des éperons" width="1200" height="1950">
+      <h1>
+        <span class="l1">Combien</span>
+        <span class="l2">le Coq t'a plumé</span>
+        <span class="l3">ce mois-ci&nbsp;?</span>
+      </h1>
+      <p class="sous-titre">
+        <span class="tag lsn">Lausanne 21,45/h</span>
+        <span class="vs">≠</span>
+        <span class="tag gva">Genève 24,60/h</span>
+      </p>
+    </header>
+
+    <section class="carte explication">
+      <h2>C'est quoi le problème&nbsp;?</h2>
+      <p>À Balexert, tes collègues sont payés <strong>24,60&nbsp;CHF de l'heure</strong>. Toi à Lausanne, pour le même travail, dans la même entreprise, tu es payé seulement <strong>21,45&nbsp;CHF</strong>.</p>
+      <p><strong>3,15&nbsp;CHF de moins à chaque heure</strong>, et tes vacances sont payées sur cette base, donc tu perds aussi là-dessus. Entre tes heures pour voir combien ça te coûte chaque mois&nbsp;!</p>
+    </section>
+
+    <section class="carte saisie">
+      <label for="heures">Tes heures du mois</label>
+      <div class="champ">
+        <input id="heures" type="text" inputmode="decimal" enterkeyhint="done" placeholder="ex. 80" autocomplete="off">
+        <span class="unite">h</span>
+      </div>
+      <p class="aide">Le chiffre « Salaire horaire … hre » sur ta fiche.</p>
+
+      <label class="case">
+        <input id="lpp" type="checkbox">
+        <span>Je cotise à la LPP</span>
+      </label>
+      <div id="bloc-lpp" class="champ-lpp" hidden>
+        <p class="label-age">Ton âge</p>
+        <div class="ages" role="radiogroup" aria-label="Ton âge">
+          <label><input type="radio" name="age" value="18"><span>-25</span></label>
+          <label><input type="radio" name="age" value="25" checked><span>25-34</span></label>
+          <label><input type="radio" name="age" value="35"><span>35-44</span></label>
+          <label><input type="radio" name="age" value="45"><span>45-54</span></label>
+          <label><input type="radio" name="age" value="55"><span>55+</span></label>
+        </div>
+      </div>
+    </section>
+
+    <section id="resultat" hidden>
+      <div class="comparaison">
+        <article class="carte ville">
+          <h2>Payé au Flon/Galeries <span>21,45/h</span></h2>
+          <dl>
+            <dt>Brut</dt><dd id="lausanne-brut"></dd>
+            <dt>Net</dt><dd class="net" id="lausanne-net"></dd>
+          </dl>
+          <details>
+            <summary>Détail</summary>
+            <table id="lausanne-detail"></table>
+          </details>
+        </article>
+
+        <article class="carte ville geneve">
+          <h2>Payé à Balexert <span>24,60/h</span></h2>
+          <dl>
+            <dt>Brut</dt><dd id="geneve-brut"></dd>
+            <dt>Net</dt><dd class="net" id="geneve-net"></dd>
+          </dl>
+          <details>
+            <summary>Détail</summary>
+            <table id="geneve-detail"></table>
+          </details>
+        </article>
+      </div>
+
+      <div class="carte vole">
+        <p class="etiquette">Ce qui manque sur ta paie ce mois-ci</p>
+        <p class="gros" id="diff-net">0 CHF</p>
+        <p class="etiquette">net <span id="diff-brut"></span></p>
+      </div>
+
+      <div class="stats">
+        <div class="carte stat s1">
+          <p class="chiffre" id="heures-offertes">0 h</p>
+          <p>bossées gratuitement</p>
+        </div>
+        <div class="carte stat s2">
+          <p class="chiffre">1&nbsp;h sur <span id="une-sur">8</span></p>
+          <p>pas payée</p>
+        </div>
+        <div class="carte stat s3">
+          <p class="chiffre" id="par-heure">3,15 CHF</p>
+          <p>de moins par heure</p>
+        </div>
+      </div>
+
+      <div class="carte annee">
+        <p class="etiquette">Ce que tu laisses au Coq en un an</p>
+        <p class="gros-annee" id="diff-annee">0 CHF</p>
+        <p><strong id="heures-annee">0 h</strong> gratuites · <strong id="jours-annee">0 jours</strong> de travail</p>
+      </div>
+
+      <div class="carte appel">
+        <p class="slogan">Même travail.<br>Même salaire.</p>
+        <p>Le Coq a généré <strong>808&nbsp;millions d'euros</strong> de chiffre d'affaires en 2025. Cet argent, c'est toi qui le produis avec ton travail&nbsp;!</p>
+        <button id="partager" type="button">Envoie à tes collègues</button>
+        <p class="copie" id="copie" hidden>Lien copié ✓ Colle-le dans ton groupe.</p>
+      </div>
+    </section>
+
+    <footer>
+      <p>Calcul indicatif : vacances 8,33 %, jours fériés 0,42 %, indemnité vêtements 20 CHF, cotisations AVS 5,3 %, AC 1,1 %, LPCFam 0,09 %, AANP 0,425 %, IJM 0,705 %. LPP : salaire du mois × 12, moins la déduction de coordination de 26 460 CHF (minimum assuré 3 780 CHF/an, chiffres 2026), avec un taux estimé selon l'âge (−25 ans : 0,35 % ; 25-34 : 3,37 % ; 35-44 : 4,81 % ; 45-54 : 7,21 % ; 55+ : 8,65 %, proportionnel aux bonifications légales de 7, 10, 15 et 18 %). Heures non payées (comparé à Genève) = heures × (24,60 − 21,45) ÷ 24,60. Chiffre d'affaires 2025 du groupe : 808 M€ (chiffres clés publiés par le groupe).</p>
+      <p>Aucune donnée n'est envoyée : tout est calculé dans ton téléphone.</p>
+    </footer>
+  </main>
+
+  <script src="calcul.js?v=10"></script>
+  <script src="app.js?v=10"></script>
+</body>
+</html>
